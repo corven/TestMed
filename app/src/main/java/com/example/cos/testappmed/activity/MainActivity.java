@@ -2,13 +2,12 @@ package com.example.cos.testappmed.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -30,7 +29,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvPage;
+    private FloatingActionButton fabLeft, fabRight;
     private ArrayList<News> newsList = new ArrayList<>();
     private int page, pageCount;
     private NewsListAdapter adapter;
@@ -52,8 +51,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tvPage = (TextView) findViewById(R.id.tvPage);
         lvNews = (ListView)findViewById(R.id.lvNews);
+
+        fabLeft = (FloatingActionButton) findViewById(R.id.fabLeft);
+        fabLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (page != 1) {
+                    page--;
+                    getNews();
+                }
+            }
+        });
+
+        fabRight = (FloatingActionButton) findViewById(R.id.fabRight);
+        fabRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (page != pageCount) {
+                    page++;
+                    getNews();
+                }
+            }
+        });
+
         lvNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,29 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         page = 1;
-
-        final ImageButton btnLeft = (ImageButton)findViewById(R.id.btnLeft);
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (page != 1) {
-                    page--;
-                    getNews();
-                }
-
-            }
-        });
-
-        final ImageButton btnRight = (ImageButton)findViewById(R.id.btnRight);
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (page != pageCount) {
-                    page++;
-                    getNews();
-                }
-            }
-        });
 
         getNews();
 
@@ -137,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        tvPage.setText(error.toString());
                     }
                 }
         ){
@@ -168,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         if (page == 1) {
             pageCount = (int)Math.ceil(newsJSON.getJSONObject(0).getDouble(ID) / COUNT_REC_IN_PAGE);
         }
-        tvPage.setText(page + " из " + pageCount);
     }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestAppMed</string>
+    <string name="app_name">Новости</string>
     <string name="action_settings">Настройки</string>
-    <string name="title_activity_current_news">News</string>
+    <string name="title_activity_current_news">Новости</string>
 </resources>

@@ -21,24 +21,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:baselineAligned="false">
             <fragment
                 android:id="@+id/fragmentData"
                 android:name="com.example.cos.testappmed.fragment.DataFragment"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/data_fragment"
-                android:layout_weight="1">
+                android:layout_weight="1.00">
 
             </fragment>
             <fragment
                 android:id="@+id/fragmentSpotlight"
                 android:name="com.example.cos.testappmed.fragment.SpotlightFragment"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/spotlight_fragment"
-                android:layout_weight="1">
+                android:layout_weight="1.00">
             </fragment>
         </LinearLayout>
     </ScrollView>
